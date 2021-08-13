@@ -1,0 +1,6 @@
+plugins {
+    id 'java'
+}
+
+group 'pm.lus'
+version '0.1.0-SNAPSHOT'
