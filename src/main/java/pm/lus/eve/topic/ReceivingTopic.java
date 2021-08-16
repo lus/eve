@@ -28,8 +28,8 @@ public class ReceivingTopic {
      */
     public static ReceivingTopic compile(final String raw) {
         final String rawPattern = Pattern.quote(raw)
-                .replace("**", "\\E([^\\.]+)\\Q")
-                .replace("*", "\\E(.)+\\Q");
+                .replace("**", "\\E(.)+\\Q")
+                .replace("*", "\\E([^\\.]+)\\Q");
 
         final Pattern pattern = Pattern.compile(rawPattern);
 

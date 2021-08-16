@@ -8,8 +8,8 @@ import pm.lus.eve.listener.Listener;
 import pm.lus.eve.listener.annotation.Listen;
 
 import java.lang.reflect.Method;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Defines an event {@link Listener}
@@ -33,7 +33,7 @@ public class ListenerDefinition {
     public static ListenerDefinition build(final Listener instance) {
         final Class<? extends Listener> clazz = instance.getClass();
 
-        final Set<ListenerMethodDefinition> methodDefinitions = new HashSet<>();
+        final Set<ListenerMethodDefinition> methodDefinitions = ConcurrentHashMap.newKeySet();
 
         for (final Method method : clazz.getDeclaredMethods()) {
             if (!method.isAnnotationPresent(Listen.class)) {
@@ -80,6 +80,14 @@ public class ListenerDefinition {
         }
 
         return new ListenerDefinition(instance, methodDefinitions);
+    }
+
+    public Listener getInstance() {
+        return this.instance;
+    }
+
+    public Set<ListenerMethodDefinition> getMethodDefinitions() {
+        return this.methodDefinitions;
     }
 
 }

@@ -7,6 +7,7 @@ import pm.lus.eve.topic.ReceivingTopic;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 /**
@@ -31,7 +32,7 @@ public class ListenerMethodDefinition {
     public static ListenerMethodDefinition build(final Method method) {
         final Set<ReceivingTopic> receivingTopics = Arrays.stream(method.getAnnotation(Listen.class).value())
                 .map(ReceivingTopic::compile)
-                .collect(Collectors.toUnmodifiableSet());
+                .collect(Collectors.toCollection(ConcurrentHashMap::newKeySet));
         final Class<? extends Event> receivingEventType = (Class<? extends Event>) method.getParameterTypes()[1];
 
         return new ListenerMethodDefinition(method, receivingTopics, receivingEventType);
