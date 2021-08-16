@@ -10,6 +10,9 @@ import java.util.function.Function;
  *
  * @param <T> The type of the key
  * @param <R> The type of the value which gets derived from the key
+ * @author Lukas Schulte Pelkum
+ * @version 0.1.0
+ * @since 0.1.0
  */
 public class TransformingDataContainer<T, R> {
 
